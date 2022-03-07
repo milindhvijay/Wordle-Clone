@@ -19,7 +19,6 @@ export default function App() {
     setGuess(newGuess)
   }
 
-
   let rows = [...state.guesses]
 
   if (rows.length < GUESS_LENGTH) {
@@ -30,14 +29,16 @@ export default function App() {
 
   rows = rows.concat(Array(numberOfGuessesRemaining).fill(''))
 
+  const isGameOver = state.guesses.length === GUESS_LENGTH
+
   
   return (
-    <div className="mx-auto w-96">
+    <div className="mx-auto w-96 relative">
       <header className="border-b border-grey-500 pb-1 my-2">
       <h1 className="text-4xl text-center">Wordle-Clone!</h1>
 
       <div>
-        <input type="text" className="w-half p-2 border-2 border-gray-500" value={guess} onChange={onChange} />
+        <input type="text" className="w-half p-2 border-2 border-gray-500" value={guess} onChange={onChange} disabled={isGameOver} />
       </div>
       </header>
 
@@ -46,6 +47,22 @@ export default function App() {
           <WordRow key = {index} letters={word} />
         ))}
       </main>
+
+      {isGameOver && (
+        <div role="modal" className="absolute bg-white left-0 right-0 top-1/4 p-6 w-3/4 mx-auto rounded border border-gray-800 text-center">
+          Game Over!
+
+          <button
+            className="block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow" 
+            onClick={() => {
+              state.newGame()
+              setGuess('')
+            }}
+          >
+            New Game
+          </button>
+        </div>
+      )}
     </div>
   );
 }
