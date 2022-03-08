@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { useStore } from './store';
+import { useStore, GUESS_LENGTH } from './store';
 import { LETTER_LENGTH } from './word-utils';
 import WordRow from './WordRow';
 
-const GUESS_LENGTH = 6
 export default function App() {
   const state = useStore()
   const [guess, setGuess] = useState('')
@@ -29,7 +28,7 @@ export default function App() {
 
   rows = rows.concat(Array(numberOfGuessesRemaining).fill(''))
 
-  const isGameOver = state.rows.length === GUESS_LENGTH
+  const isGameOver = state.gameState !== 'playing'
 
   
   return (
