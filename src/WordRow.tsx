@@ -32,7 +32,8 @@ function CharacterBox({ value, state }: CharacterBoxProps) {
   const stateStyles = state == null ? '' : characterStateStyles[state]
   
   return (
-    <span className={`inline-block border-2 border-gray-500 p-4 font-bold uppercase text-center text-2xl ${stateStyles}`}
+    <span className={`inline-block border-2 border-gray-500 p-4 font-bold before:inline-block before:content-['_'] 
+    uppercase text-center text-2xl ${stateStyles}`}
     >{value}</span>
   ) 
 }
