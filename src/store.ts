@@ -24,29 +24,29 @@ export const useStore = create<StoreState>(
             function addGuess(guess: string) {
                 const result = computeGuess(guess, get().answer)
 
-                const didWin = result.every(i => i ===LetterState.Match)
+                const didWin = result.every(i => i === LetterState.Match)
 
                 const rows = [...get().rows, { guess, result, }]
-        
+
                 set(() => ({
                     rows,
                     gameState: didWin ? 'won' : (rows.length === GUESS_LENGTH) ? 'lost' : 'playing',
-                 }))
+                }))
             }
             return {
-                    answer: getRandomWord(),
-                    rows: [],
-                    gameState: 'playing',
-                    addGuess,
-                    newGame: (intialRows = []) => {
-                        set({
-                            answer: getRandomWord(),
-                            rows: [],
-                            gameState: 'playing',
-                        })
+                answer: getRandomWord(),
+                rows: [],
+                gameState: 'playing',
+                addGuess,
+                newGame: (intialRows = []) => {
+                    set({
+                        answer: getRandomWord(),
+                        rows: [],
+                        gameState: 'playing',
+                    })
 
-                        intialRows.forEach(addGuess)
-                    }
+                    intialRows.forEach(addGuess)
+                }
             }
         },
         {

@@ -30,20 +30,20 @@ export default function App() {
 
   const isGameOver = state.gameState !== 'playing'
 
-  
+
   return (
     <div className="mx-auto w-96 relative">
       <header className="border-b border-grey-500 pb-1 my-2">
-      <h1 className="text-4xl text-center">Wordle-Clone!</h1>
+        <h1 className="text-4xl text-center">Wordle-Clone!</h1>
 
-      <div>
-        <input type="text" className="w-half p-2 border-2 border-gray-500" value={guess} onChange={onChange} disabled={isGameOver} />
-      </div>
+        <div>
+          <input type="text" className="w-half p-2 border-2 border-gray-500" value={guess} onChange={onChange} disabled={isGameOver} />
+        </div>
       </header>
 
       <main className='grid grid-rows-6 gap-4'>
-        {rows.map(({guess, result}, index) =>(
-          <WordRow key = {index} letters={guess} result={result} />
+        {rows.map(({ guess, result }, index) => (
+          <WordRow key={index} letters={guess} result={result} />
         ))}
       </main>
 
@@ -52,7 +52,7 @@ export default function App() {
           Game Over!
 
           <button
-            className="block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow" 
+            className="block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
             onClick={() => {
               state.newGame()
               setGuess('')

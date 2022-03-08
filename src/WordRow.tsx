@@ -6,7 +6,7 @@ interface WordRowProps {
   result?: LetterState[]
 }
 
-export default function WordRow({ letters: lettersProp = '', result = []}: WordRowProps) {
+export default function WordRow({ letters: lettersProp = '', result = [] }: WordRowProps) {
   const lettersRemaining = LETTER_LENGTH - lettersProp.length
   const letters = lettersProp
     .split('')
@@ -14,7 +14,7 @@ export default function WordRow({ letters: lettersProp = '', result = []}: WordR
 
   return (
     <div className="grid grid-cols-5 gap-4">
-      {letters.map((char , index) => (
+      {letters.map((char, index) => (
         <CharacterBox key={index} value={char} state={result[index]} />
       ))}
     </div>
@@ -28,12 +28,12 @@ interface CharacterBoxProps {
 function CharacterBox({ value, state }: CharacterBoxProps) {
   //console.log(state)
   const stateStyles = state == null ? '' : characterStateStyles[state]
-  
+
   return (
     <span className={`inline-block border-2 border-gray-500 p-4 font-bold before:inline-block before:content-['_'] 
     uppercase text-center text-2xl ${stateStyles}`}
     >{value}</span>
-  ) 
+  )
 }
 
 const characterStateStyles = {
