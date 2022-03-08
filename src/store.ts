@@ -1,28 +1,33 @@
 import create from "zustand"
 import { persist } from "zustand/middleware"
-import { getRandomWord } from './word-utils';
+import { getRandomWord, LetterState, computeGuess } from './word-utils';
+
+interface GuessRow {
+    guess: string
+    result?: LetterState[]
+}
 
 interface StoreState {
     answer: string
-    guesses: string[]
+    rows: GuessRow[]
     addGuess: (guess: string) => void
     newGame: () => void
 }
 
 export const useStore = create<StoreState>(
     persist(
-        (set) => ({
+        (set, get) => ({
             answer: getRandomWord(),
-            guesses: ['hello', 'anime', 'unity'],
+            rows: [],
             addGuess: (guess: string) => {
                 set(state => ({
-                    guesses: [...state.guesses, guess],
+                    rows: [...state.rows, { guess, result:computeGuess(guess, state.answer) }],
                  }))
             },
             newGame: () => {
                 set({
                     answer: getRandomWord(),
-                    guesses: [],
+                    rows: [],
                 })
             }
         }),
