@@ -55,10 +55,11 @@ export default function App() {
       <main className='grid grid-rows-6 gap-4'>
         {rows.map(({ guess, result }, index) => (
           <WordRow 
-          key={index} 
-          letters={guess} 
-          result={result}
-          className={showInvalidGuess && currentRow === index ? 'animate-bounce': ''}
+            key={index} 
+            letters={guess} 
+            result={result}
+            className={
+              showInvalidGuess && currentRow === index ? 'animate-bounce': ''}
           />
         ))}
       </main>
@@ -66,7 +67,8 @@ export default function App() {
       {isGameOver && (
         <div role="modal" className="absolute bg-white left-0 right-0 top-1/4 p-6 w-3/4 mx-auto rounded border border-gray-800 text-center">
           Game Over!
-
+          <WordRow 
+            letters={state.answer} />
           <button
             className="block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
             onClick={() => {
