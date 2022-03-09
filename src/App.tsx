@@ -6,7 +6,7 @@ import WordRow from './WordRow';
 
 export default function App() {
   const state = useStore()
-  const [guess, setGuess] = useGuess()
+  const [guess, setGuess, addGuessLetter] = useGuess()
   const [showInvalidGuess, setInvalidGuess] = useState(false)
   const addGuess = useStore(s => s.addGuess)
   const previousGuess = usePrevious(guess)
@@ -53,7 +53,10 @@ export default function App() {
         <h1 className="text-4xl text-center">Wordle-Clone!</h1>
       </header>
 
-      <Keyboard />
+      <Keyboard
+        onClick={letter => {
+          addGuessLetter(letter)
+        }} />
 
       <main className='grid grid-rows-6 gap-4'>
         {rows.map(({ guess, result }, index) => (
@@ -87,12 +90,10 @@ export default function App() {
   );
 }
 
-function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
-
+function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>, (letter: string) => void] {
   const [guess, setGuess] = useState('')
 
-  const onKeyDown = (e: KeyboardEvent) => {
-    let letter = e.key
+  const addGuessletter = (letter: string) => {
     setGuess((currGuess) => {
       const newGuess = letter.length === 1 ? currGuess + letter : currGuess
 
@@ -112,6 +113,11 @@ function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
     })
   }
 
+  const onKeyDown = (e: KeyboardEvent) => {
+    let letter = e.key
+    addGuessletter(letter)
+  }
+
   useEffect(() => {
     document.addEventListener('keydown', onKeyDown)
     return () => {
@@ -121,7 +127,7 @@ function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
 
 
 
-  return [guess, setGuess]
+  return [guess, setGuess, addGuessletter]
 }
 
 function usePrevious<T>(value: T): T {
