@@ -53,12 +53,7 @@ export default function App() {
         <h1 className="text-4xl text-center">Wordle-Clone!</h1>
       </header>
 
-      <Keyboard
-        onClick={letter => {
-          addGuessLetter(letter)
-        }} />
-
-      <main className='grid grid-rows-6 gap-4'>
+      <main className='grid grid-rows-6 gap-4 mb-4'>
         {rows.map(({ guess, result }, index) => (
           <WordRow
             key={index}
@@ -69,6 +64,11 @@ export default function App() {
           />
         ))}
       </main>
+
+      <Keyboard
+        onClick={letter => {
+          addGuessLetter(letter)
+        }} />
 
       {isGameOver && (
         <div role="modal" className="absolute bg-white left-0 right-0 top-1/4 p-6 w-3/4 mx-auto rounded border border-gray-800 text-center">
