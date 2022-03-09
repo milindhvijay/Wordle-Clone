@@ -67,6 +67,6 @@ export function computeGuess(guess: string, answerString: string): LetterState[]
     return result
 }
 
-export function isValidWord(word: string): boolean{
+export function isValidWord(word: string): boolean {
     return wordBank.includes(word)
 }
