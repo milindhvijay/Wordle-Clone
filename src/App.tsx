@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import Keyboard from './Keyboard';
 import { useStore, GUESS_LENGTH } from './store';
 import { LETTER_LENGTH, isValidWord } from './word-utils';
 import WordRow from './WordRow';
@@ -52,14 +53,16 @@ export default function App() {
         <h1 className="text-4xl text-center">Wordle-Clone!</h1>
       </header>
 
+      <Keyboard />
+
       <main className='grid grid-rows-6 gap-4'>
         {rows.map(({ guess, result }, index) => (
-          <WordRow 
-            key={index} 
-            letters={guess} 
+          <WordRow
+            key={index}
+            letters={guess}
             result={result}
             className={
-              showInvalidGuess && currentRow === index ? 'animate-bounce': ''}
+              showInvalidGuess && currentRow === index ? 'animate-bounce' : ''}
           />
         ))}
       </main>
@@ -67,7 +70,7 @@ export default function App() {
       {isGameOver && (
         <div role="modal" className="absolute bg-white left-0 right-0 top-1/4 p-6 w-3/4 mx-auto rounded border border-gray-800 text-center">
           Game Over!
-          <WordRow 
+          <WordRow
             letters={state.answer} />
           <button
             className="block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
@@ -85,7 +88,7 @@ export default function App() {
 }
 
 function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
-  
+
   const [guess, setGuess] = useState('')
 
   const onKeyDown = (e: KeyboardEvent) => {
@@ -116,7 +119,7 @@ function useGuess(): [string, React.Dispatch<React.SetStateAction<string>>] {
     }
   }, [])
 
-  
+
 
   return [guess, setGuess]
 }
