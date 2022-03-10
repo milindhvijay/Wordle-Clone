@@ -71,12 +71,14 @@ export default function App() {
         }} />
 
       {isGameOver && (
-        <div role="modal" className="absolute bg-white left-0 right-0 top-1/4 p-6 w-3/4 mx-auto rounded border border-gray-800 text-center">
-          Game Over!
+        <div role="modal" className="absolute bg-white border border-gray-500 rounded text-center
+        w-11/12 h-1/2 p-6 left-0 right-0 mx-auto top-1/4
+       grid grid-rows-4">
+          <p>Game Over!</p>
           <WordRow
             letters={state.answer} />
           <button
-            className="block border rounded border-green-500 bg-green-500 p-2 mt-4 mx-auto shadow"
+            className="border border-green-500 rounded bg-green-500 p-2 mt-4 text-gray-800 shadow"
             onClick={() => {
               state.newGame()
               setGuess('')
